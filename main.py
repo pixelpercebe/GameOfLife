@@ -16,19 +16,18 @@ def draw_grid():
 
 
 def draw_population():
-    population = []
+    init_population = []
     screen.fill("black")
-
     for row in range(len(matrix)):
         for col in range(len(matrix[0])):
             draw_pix_x = row * x_size
             draw_pix_y = col * y_size
             if matrix[row][col] == 1:
-                population.append((col,row))
-                print(population)
+                init_population.append((row,col))
                 pygame.draw.rect(screen,"white",(draw_pix_y,draw_pix_x,x_size,y_size))
             if matrix[row][col] == 2:
                 pygame.draw.rect(screen, "blue", (draw_pix_y, draw_pix_x, x_size, y_size))
+    return init_population
 
 def analyse(population):
     functions.analyse_neighbours(matrix, population)
@@ -50,10 +49,9 @@ screen.fill("black")
 
 matrix = functions.create_grid(dimensions, x_size, y_size)
 
-
 while running:
 
-    ## draw_grid(matrix)  ##dibuja la matriz si es necesario
+    ##draw_grid()  ##dibuja la matriz si es necesario
     # poll for events
     # pygame.QUIT event means the user clicked X to close your window
     for event in pygame.event.get():
@@ -66,11 +64,12 @@ while running:
                 matrix[mouse_pos[1]//x_size][mouse_pos[0]//y_size] = 1
             else:
                 matrix[mouse_pos[1] // x_size][mouse_pos[0] // y_size] = 0
-            draw_population()
+            pop=draw_population()
         if event.type == pygame.KEYDOWN:
             if event.key & pygame.K_SPACE:
                 start = 1 if start == 0 else 0
                 print(start)
+                analyse(pop)
 
 
 

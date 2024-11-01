@@ -73,10 +73,14 @@ while running:
                     start = 1 if start == 0 else 0
                     print(start)
                 case pygame.K_w:
+                    start = 0
                     matrix = analyse(pop)
                     print("next iteration")
                 case pygame.K_ESCAPE:
+                    start = 0
                     clean_screen(matrix)
+
+
     if start:
         matrix = analyse(pop)
 

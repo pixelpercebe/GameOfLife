@@ -1,5 +1,5 @@
 import numpy
-
+import copy
 
 def st():
     row = int(input("Enter the number of rows:"))
@@ -22,4 +22,15 @@ def st():
 matrix = [[20 for column in range(2)] for row in range(5)]
 print(matrix)
 print(len(matrix))
+new_matrix = matrix
 print(matrix[1][1])
+print("++++++++++++++++++++++++++++")
+print(new_matrix)
+new_matrix[1][0] = 2
+print(new_matrix)
+print(matrix)
+print("++++++++++++++++++++++++++++deep copy")
+new_matrix= copy.deepcopy(matrix)
+new_matrix[1][0] = 6
+print(new_matrix)
+print(matrix)

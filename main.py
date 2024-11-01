@@ -7,7 +7,7 @@ def draw_grid():
     aux_x_size = x_size
     aux_y_size = y_size
     for row in range(len(matrix)):
-        pygame.draw.line(screen, "white", (0, aux_x_size), (dimensions[0], aux_x_size),1)
+        pygame.draw.line(screen, "white", (0, aux_x_size), (dimensions[0], aux_x_size), 1)
         aux_x_size = aux_x_size + x_size
         for col in range(len(matrix[0])):
             pygame.draw.line(screen, "white", (aux_y_size, 0), (aux_y_size, dimensions[1]), 1)
@@ -22,20 +22,21 @@ def draw_population():
             draw_pix_x = row * x_size
             draw_pix_y = col * y_size
             if matrix[row][col] == 1:
-                init_population.append((row,col))
-                pygame.draw.rect(screen,"white",(draw_pix_y,draw_pix_x,x_size,y_size))
+                init_population.append((row, col))
+                pygame.draw.rect(screen, "white", (draw_pix_y, draw_pix_x, x_size, y_size))
     return init_population
 
 
 def analyse(population):
     count_matrix = functions.analyse_neighbours(matrix, population)
-    new_matrix = functions.verify_alive(matrix,count_matrix)
+    new_matrix = functions.verify_alive(matrix, count_matrix)
     return new_matrix
 
 
 def clean_screen(current_matrix):
     functions.clean_matrix(current_matrix)
     draw_population()
+
 
 # pygame setup
 pygame.init()

@@ -59,23 +59,27 @@ def verify_terrain(neighbour_count_matrix):
         for col in range(len(neighbour_count_matrix[row])):
             n = neighbour_count_matrix[row][col]
             match n:
+                case _ if n >= 4:
+                    new_matrix[row][col] = 1
                 case _ if n < 4:
                     new_matrix[row][col] = 0
-                case _ if n > 4:
-                    new_matrix[row][col] = 1
-                case _ if n == 4:
-                    new_matrix[row][col] = 1
     return new_matrix
 
 
 def generate_random_terrain(matrix):
     population = []
-    for i in range(len(matrix[0]-1)):
-        for j in range(len(matrix[1]-1)):
-            val = random.randint(0, 1)
-            if val:
+    for i in range(len(matrix)):
+        for j in range(len(matrix[0])):
+            val = random.randint(0, 10)
+            if val > 5:
                 population.append((i, j))
     return population
+
+
+def load_init_matrix(matrix, population):
+    for i in population:
+        matrix[i[0]][i[1]] = 1
+    return matrix
 
 
 def clean_matrix(matrix):

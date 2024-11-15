@@ -23,8 +23,8 @@ def draw_grid():
 
 
 def draw_population():
-	init_population = []
 	screen.fill("blue")
+	init_population = []
 	for row in range(len(matrix)):
 		for col in range(len(matrix[0])):
 			draw_pix_x = row * x_size
@@ -33,6 +33,7 @@ def draw_population():
 				init_population.append((row, col))
 				pygame.draw.rect(screen, "green", (draw_pix_y, draw_pix_x, x_size, y_size))
 	return init_population
+
 
 def analyse(population):
 	count_matrix = functions.analyse_neighbours(matrix, population)
@@ -50,8 +51,8 @@ pygame.init()
 
 start = 0
 dimensions = (1280, 720)  # 1280,720
-x_size =10
-y_size = 10
+x_size = 5
+y_size = 5
 
 screen = pygame.display.set_mode(dimensions)
 clock = pygame.time.Clock()
@@ -61,7 +62,7 @@ font = pygame.font.Font(None, 36)  # Usa la fuente predeterminada, tamaño 36
 screen.fill("blue")
 matrix = functions.create_grid(dimensions, x_size, y_size)
 rand_pop = functions.generate_random_terrain(matrix)
-analyse(rand_pop)
+functions.load_init_matrix(matrix, rand_pop)
 
 while running:
 	# poll for events
@@ -99,5 +100,5 @@ while running:
 	# RENDER YOUR GAME HERE
 	# flip() the display to put your work on screen
 	pygame.display.flip()
-	clock.tick(10)  # limits FPS to 60
+	clock.tick(60)  # limits FPS to 60
 pygame.quit()

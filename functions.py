@@ -1,5 +1,6 @@
 import numpy
 import copy
+import random
 
 
 def create_grid(dimensions: tuple, x_size, y_size):
@@ -47,6 +48,34 @@ def verify_alive(old_matrix, neighbour_count_matrix):
                 case _ if n == 3:
                     new_matrix[row][col] = 1
     return new_matrix
+
+
+def verify_terrain(neighbour_count_matrix):
+    new_matrix = copy.deepcopy(neighbour_count_matrix)
+    for row in new_matrix:
+        for col in range(len(row)):
+            row[col] = 0
+    for row in range(len(neighbour_count_matrix)):
+        for col in range(len(neighbour_count_matrix[row])):
+            n = neighbour_count_matrix[row][col]
+            match n:
+                case _ if n < 4:
+                    new_matrix[row][col] = 0
+                case _ if n > 4:
+                    new_matrix[row][col] = 1
+                case _ if n == 4:
+                    new_matrix[row][col] = 1
+    return new_matrix
+
+
+def generate_random_terrain(matrix):
+    population = []
+    for i in range(len(matrix[0]-1)):
+        for j in range(len(matrix[1]-1)):
+            val = random.randint(0, 1)
+            if val:
+                population.append((i, j))
+    return population
 
 
 def clean_matrix(matrix):

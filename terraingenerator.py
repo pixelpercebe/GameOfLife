@@ -34,10 +34,9 @@ def draw_population():
 				pygame.draw.rect(screen, "green", (draw_pix_y, draw_pix_x, x_size, y_size))
 	return init_population
 
-
 def analyse(population):
 	count_matrix = functions.analyse_neighbours(matrix, population)
-	new_matrix = functions.verify_alive(matrix, count_matrix)
+	new_matrix = functions.verify_terrain(count_matrix)
 	return new_matrix
 
 
@@ -51,17 +50,18 @@ pygame.init()
 
 start = 0
 dimensions = (1280, 720)  # 1280,720
-x_size = 5
-y_size = 5
+x_size =10
+y_size = 10
 
 screen = pygame.display.set_mode(dimensions)
 clock = pygame.time.Clock()
 running = True
 
 font = pygame.font.Font(None, 36)  # Usa la fuente predeterminada, tamaño 36
-screen.fill("black")
-
+screen.fill("blue")
 matrix = functions.create_grid(dimensions, x_size, y_size)
+rand_pop = functions.generate_random_terrain(matrix)
+analyse(rand_pop)
 
 while running:
 	# poll for events
